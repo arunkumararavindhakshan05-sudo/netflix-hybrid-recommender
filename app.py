@@ -7,7 +7,6 @@ from src.data_preparation import prepare_data
 from src.hybrid_recommender import HybridRecommender
 from src.popularity_recommender import recommend_popular_movies
 
-
 st.set_page_config(
     page_title="CineMatch",
     page_icon="🎬",
