@@ -1,27 +1,38 @@
-from pathlib import Path
-
 import pandas as pd
 
-# Find the dataset folder relative to this project.
-DATA_DIR = (
-    Path(__file__).resolve().parents[1]
-    / "data"
-    / "ml-latest-small"
-)
+from src.download_data import ensure_dataset
 
 
 def load_data():
     """Load all MovieLens CSV files."""
 
-    movies = pd.read_csv(DATA_DIR / "movies.csv")
-    ratings = pd.read_csv(DATA_DIR / "ratings.csv")
-    tags = pd.read_csv(DATA_DIR / "tags.csv")
-    links = pd.read_csv(DATA_DIR / "links.csv")
+    # Verify that the dataset exists.
+    # If it is missing, download and extract it automatically.
+    data_dir = ensure_dataset()
+
+    movies = pd.read_csv(
+        data_dir / "movies.csv"
+    )
+
+    ratings = pd.read_csv(
+        data_dir / "ratings.csv"
+    )
+
+    tags = pd.read_csv(
+        data_dir / "tags.csv"
+    )
+
+    links = pd.read_csv(
+        data_dir / "links.csv"
+    )
 
     return movies, ratings, tags, links
 
 
-def inspect_data(name, dataframe):
+def inspect_data(
+    name: str,
+    dataframe: pd.DataFrame,
+) -> None:
     """Display basic information about a dataset."""
 
     print(f"\n{'=' * 50}")
@@ -30,7 +41,9 @@ def inspect_data(name, dataframe):
 
     print(f"Rows: {dataframe.shape[0]}")
     print(f"Columns: {dataframe.shape[1]}")
-    print(f"Column names: {list(dataframe.columns)}")
+    print(
+        f"Column names: {list(dataframe.columns)}"
+    )
 
     print("\nFirst five records:")
     print(dataframe.head())
@@ -42,7 +55,22 @@ def inspect_data(name, dataframe):
 if __name__ == "__main__":
     movies, ratings, tags, links = load_data()
 
-    inspect_data("Movies", movies)
-    inspect_data("Ratings", ratings)
-    inspect_data("Tags", tags)
-    inspect_data("Links", links)
+    inspect_data(
+        "Movies",
+        movies,
+    )
+
+    inspect_data(
+        "Ratings",
+        ratings,
+    )
+
+    inspect_data(
+        "Tags",
+        tags,
+    )
+
+    inspect_data(
+        "Links",
+        links,
+    )
