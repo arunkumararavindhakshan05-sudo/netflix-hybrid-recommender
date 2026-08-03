@@ -1,0 +1,22 @@
+# Virtual environment
+.venv/
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Environment variables and secrets
+.env
+.streamlit/secrets.toml
+
+# Downloaded datasets and generated models
+data/
+models/
+artifacts/
+
+# IDE and operating system
+.vscode/
+.DS_Store
+Thumbs.db
